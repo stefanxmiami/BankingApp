@@ -3,9 +3,8 @@ import java.util.Scanner;
 
 public class MenuSelector extends Bank {
     public void selectMenu(String mn) {
-
         BankAccount bankAccount = new BankAccount();
-        Bank bank = new Bank();
+        SavedUsers savedUsers = new SavedUsers();
         Scanner sc = new Scanner(System.in);
         boolean optionActive = true;
         String passVerificator = bankAccount.getPassword();
@@ -37,7 +36,9 @@ public class MenuSelector extends Bank {
             case "sign out":
             case "signout":
             case "/":
+                savedUsers.saveUserInfo();
                 System.out.println("Signing out..");
+                savedUsers.deletePreviousUserInfo();
                 innerMenuLoop = false;
                 break;
             case "options":
@@ -49,6 +50,10 @@ public class MenuSelector extends Bank {
                 String newOptionsMenu = sc.next();
                 do {
                     switch (newOptionsMenu.toLowerCase(Locale.ROOT).trim().replaceAll(" ", "")) {
+                        default:
+                            System.out.println("Invalid choice!");
+                            optionActive = false;
+                            break;
                         case "back":
                         case "b":
                             optionActive = false;
@@ -73,8 +78,6 @@ public class MenuSelector extends Bank {
                         case "cp":
                             System.out.println("You Must Verify Your Password First!");
                             passVerificator = sc.next();
-                            //System.out.println(passVerificator);
-                            //System.out.println(bankAccount.getPassword());
                             if (passVerificator.equals(bankAccount.getPassword())) {
                                 System.out.println("Password Is Correct!");
                                 System.out.println("Enter A New Username:");
