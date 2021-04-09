@@ -47,7 +47,6 @@ public class SignUpLogIn extends Bank implements LogInSingUpGUI{
                             return false;
                         }else{ System.out.println("Wrong Password!"); }
                     }else{ System.out.println("Wrong Username!");
-                        //System.out.printf("password was: "+ savedUsers.listUserNames);
                         }
 
                 default:
